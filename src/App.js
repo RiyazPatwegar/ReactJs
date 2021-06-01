@@ -35,9 +35,9 @@ function App() {
       return [expenseData, ...prevExpenseItems];
     });    
   };
-
+  
   return (
-    <div className="expenses">      
+    <div className="expenses">         
       <NewExpense onNewExpenseData={saveExpenseDataHandler}/>
       <Expenses expenseItems={expenseItems}/>
     </div>

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import userEvent from '@testing-library/user-event';
 import ExpenseForm from './ExpenseForm';
 import './NewExpense.css';
 
@@ -12,11 +14,23 @@ const NewExpense = (props) => {
         console.log(newExpenseData);        
 
         props.onNewExpenseData(newExpenseData);
+        setShowForm(false);
     };
+
+    const [showForm, setShowForm] = useState(false);
+
+    const showFormHandler = (event) => {
+        setShowForm(true);
+    }
+
+    const hideFormHandler = (event) => {
+        setShowForm(false);
+    }
 
     return (
         <div className="new-expense">
-            <ExpenseForm onAddNewExpense={newExpenseDataHandler}/>
+            {!showForm === true  && <button onClick={showFormHandler}>Add Expense</button> }
+            {showForm && <ExpenseForm onHideForm={hideFormHandler} onAddNewExpense={newExpenseDataHandler}/>}
         </div>
     )
 }
